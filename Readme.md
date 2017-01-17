@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Светлана Мальцева](https://up.htmlacademy.ru/javascript/8/user/88410).
-* Наставник: `Неизвестно`.
+* Наставник: [Татьяна Коростелева](https://htmlacademy.ru/profile/korosteleva).
 
 ---
 
