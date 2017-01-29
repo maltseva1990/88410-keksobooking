@@ -12,6 +12,7 @@ var checkOut = formField.querySelector('#timeout');
 var type = formField.querySelector('#type');
 var roomNumber = formField.querySelector('#room_number');
 var capacity = formField.querySelector('#capacity');
+var PIN_ACTIVE_CLASS_NAME = 'pin--active';
 
 adres.required = true;
 price.required = true;
@@ -30,13 +31,13 @@ for (var i = 0; i < pins.length; i++) {
 }
 
 function addPin(pin) {
-  pin.classList.add('pin--active');
+  pin.classList.add(PIN_ACTIVE_CLASS_NAME);
 }
 
 function deletePin() {
-  var pinActive = document.querySelector('.pin--active');
+  var pinActive = document.querySelector('.' + PIN_ACTIVE_CLASS_NAME);
   if (pinActive) {
-    pinActive.classList.remove('pin--active');
+    pinActive.classList.remove(PIN_ACTIVE_CLASS_NAME);
   }
 }
 
