@@ -24,12 +24,12 @@ adTitle.maxLength = 100;
 for (var i = 0; i < pins.length; i++) {
   pins[i].addEventListener('click', function (event) {
     deletePin();
-    addPin (event.currentTarget);
+    addPin(event.currentTarget);
     dialogWindow.style.display = 'block';
   });
 }
 
-function addPin (pin) {
+function addPin(pin) {
   pin.classList.add('pin--active');
 }
 
@@ -68,7 +68,7 @@ type.addEventListener('change', function () {
 
 roomNumber.addEventListener('change', function () {
   var roomValue = +roomNumber.value;
-  if(roomValue === 2 || roomValue === 100){
+  if (roomValue === 2 || roomValue === 100) {
     capacity.value = 3;
   } else {
     capacity.value = 0;
