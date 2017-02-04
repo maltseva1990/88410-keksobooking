@@ -3,8 +3,6 @@
 var pins = document.querySelectorAll('.pin');
 var dialogWindow = document.querySelector('.dialog');
 var dialogClose = dialogWindow.querySelector('.dialog__close');
-var pinMap = document.querySelector('.tokyo__pin-map');
-
 var formField = document.querySelector('.notice__form');
 var adTitle = formField .querySelector('#title');
 var price = formField .querySelector('#price');
