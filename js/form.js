@@ -44,7 +44,7 @@ var clickHandler = function () {
 pinMap.addEventListener('click', clickHandler, true);
 
 var keydownHandler = function (event) {
-  if(event.keyCode === ENTER_KEY_CODE ) {
+  if (event.keyCode === ENTER_KEY_CODE) {
     deletePin();
     var clickedElement = event.target;
     clickedElement.classList.add('pin--active');
