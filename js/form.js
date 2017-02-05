@@ -3,6 +3,7 @@
 var pins = document.querySelectorAll('.pin');
 var dialogWindow = document.querySelector('.dialog');
 var dialogClose = dialogWindow.querySelector('.dialog__close');
+var pinMap = document.querySelector('.tokyo__pin-map');
 var formField = document.querySelector('.notice__form');
 var adTitle = formField .querySelector('#title');
 var price = formField .querySelector('#price');
@@ -14,7 +15,6 @@ var roomNumber = formField.querySelector('#room_number');
 var capacity = formField.querySelector('#capacity');
 var PIN_ACTIVE_CLASS_NAME = 'pin--active';
 var ENTER_KEY_CODE = 13;
-var ESCAPE_KEY_CODE = 27;
 
 adres.required = true;
 price.required = true;
@@ -24,33 +24,36 @@ price.max = 1000000;
 adTitle.minLength = 30;
 adTitle.maxLength = 100;
 
-var isActivateEvent = function (evt) {
-  return evt.keyCode && evt.keyCode === ENTER_KEY_CODE;
-};
-
-var isDiactivateEvent = function (evt) {
-  return evt.keyCode && evt.keyCode === ESCAPE_KEY_CODE;
-};
-
 for (var i = 0; i < pins.length; i++) {
-  pins[i].addEventListener('click', function (event) {
+  var element = pins[i];
+  if (element.classList.contains('pin--active')) {
+    element.setAttribute('aria-pressed', 'true');
+  } else {
+    element.setAttribute('aria-pressed', 'false');
+  }
+}
+
+var clickHandler = function () {
+  deletePin();
+  var clickedElement = event.target;
+  clickedElement.parentNode.classList.add('pin--active');
+  clickedElement.parentNode.setAttribute('aria-pressed', 'true');
+  dialogWindow.style.display = 'block';
+};
+
+pinMap.addEventListener('click', clickHandler, true);
+
+var keydownHandler = function (event) {
+  if(event.keyCode === ENTER_KEY_CODE ) {
     deletePin();
-    addPin(event.currentTarget);
+    var clickedElement = event.target;
+    clickedElement.classList.add('pin--active');
+    clickedElement.setAttribute('aria-pressed', 'true');
     dialogWindow.style.display = 'block';
-  });
-}
-for (var j = 0; j < pins.length; j++) {
-  pins[j].addEventListener('keydown', function (event) {
-    if (event.keyCode === ENTER_KEY_CODE) {
-      deletePin();
-      addPin(event.currentTarget);
-      dialogWindow.style.display = 'block';
-    }
-  });
-}
-function addPin(pin) {
-  pin.classList.add(PIN_ACTIVE_CLASS_NAME);
-}
+  }
+};
+
+pinMap.addEventListener('keydown', keydownHandler, true);
 
 function deletePin() {
   var pinActive = document.querySelector('.' + PIN_ACTIVE_CLASS_NAME);
@@ -59,18 +62,6 @@ function deletePin() {
   }
   document.removeEventListener('keydown', keydownHandler);
 }
-
-var keydownHandler = function (evt) {
-  if (isDiactivateEvent(evt)) {
-    dialogWindow.style.display = 'none';
-  }
-};
-
-dialogClose.addEventListener('keydown', function (evt) {
-  if (isActivateEvent(evt)) {
-    deletePin();
-  }
-});
 
 dialogClose.addEventListener('click', function () {
   dialogWindow.style.display = 'none';
