@@ -24,7 +24,7 @@ price.max = 1000000;
 adTitle.minLength = 30;
 adTitle.maxLength = 100;
 
-var setAtr = function(element) {
+var setAtr = function (element) {
   element.classList.add(PIN_ACTIVE_CLASS_NAME);
   element.setAttribute('aria-pressed', 'true');
 };
