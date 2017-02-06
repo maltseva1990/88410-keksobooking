@@ -1,6 +1,6 @@
 'use strict';
 
-var pins = document.querySelectorAll('.pin');
+// var pins = document.querySelectorAll('.pin');
 var dialogWindow = document.querySelector('.dialog');
 var dialogClose = dialogWindow.querySelector('.dialog__close');
 var pinMap = document.querySelector('.tokyo__pin-map');
@@ -24,44 +24,47 @@ price.max = 1000000;
 adTitle.minLength = 30;
 adTitle.maxLength = 100;
 
-for (var i = 0; i < pins.length; i++) {
-  var element = pins[i];
-  if (element.classList.contains('pin--active')) {
-    element.setAttribute('aria-pressed', 'true');
-  } else {
-    element.setAttribute('aria-pressed', 'false');
-  }
-}
-
-var clickHandler = function () {
-  deletePin();
-  var clickedElement = event.target;
-  clickedElement.parentNode.classList.add('pin--active');
-  clickedElement.parentNode.setAttribute('aria-pressed', 'true');
-  dialogWindow.style.display = 'block';
+var setAtr = function(element) {
+  element.classList.add(PIN_ACTIVE_CLASS_NAME);
+  element.setAttribute('aria-pressed', 'true');
 };
 
-pinMap.addEventListener('click', clickHandler, true);
+var removeAtr = function (element) {
+  element.classList.remove(PIN_ACTIVE_CLASS_NAME);
+  element.setAttribute('aria-pressed', 'false');
+};
+
+var showDialog = function (element) {
+  element.style.display = 'block';
+};
+
+var clickHandler = function (event) {
+  deletePin();
+  if (event.target.classList.contains('pin')) {
+    setAtr(event.target);
+    showDialog(dialogWindow);
+  }
+};
+
+pinMap.addEventListener('click', clickHandler);
 
 var keydownHandler = function (event) {
-  if (event.keyCode === ENTER_KEY_CODE) {
+  if (event.keyCode === ENTER_KEY_CODE && event.target.classList.contains('pin')) {
     deletePin();
-    var clickedElement = event.target;
-    clickedElement.classList.add('pin--active');
-    clickedElement.setAttribute('aria-pressed', 'true');
-    dialogWindow.style.display = 'block';
+    setAtr(event.target);
+    showDialog(dialogWindow);
   }
 };
 
-pinMap.addEventListener('keydown', keydownHandler, true);
+pinMap.addEventListener('keydown', keydownHandler);
 
-function deletePin() {
+var deletePin = function () {
   var pinActive = document.querySelector('.' + PIN_ACTIVE_CLASS_NAME);
   if (pinActive) {
-    pinActive.classList.remove(PIN_ACTIVE_CLASS_NAME);
+    removeAtr(pinActive);
   }
   document.removeEventListener('keydown', keydownHandler);
-}
+};
 
 dialogClose.addEventListener('click', function () {
   dialogWindow.style.display = 'none';
