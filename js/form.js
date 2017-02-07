@@ -1,6 +1,5 @@
 'use strict';
 
-// var pins = document.querySelectorAll('.pin');
 var dialogWindow = document.querySelector('.dialog');
 var dialogClose = dialogWindow.querySelector('.dialog__close');
 var pinMap = document.querySelector('.tokyo__pin-map');
@@ -24,14 +23,22 @@ price.max = 1000000;
 adTitle.minLength = 30;
 adTitle.maxLength = 100;
 
-var setAtr = function (element) {
+var setupActivePin = function (element) {
   element.classList.add(PIN_ACTIVE_CLASS_NAME);
   element.setAttribute('aria-pressed', 'true');
 };
 
-var removeAtr = function (element) {
+var removeActivePin = function (element) {
   element.classList.remove(PIN_ACTIVE_CLASS_NAME);
   element.setAttribute('aria-pressed', 'false');
+};
+
+var deletePin = function () {
+  var pinActive = document.querySelector('.' + PIN_ACTIVE_CLASS_NAME);
+  if (pinActive) {
+    removeActivePin(pinActive);
+  }
+  document.removeEventListener('keydown', keydownHandler);
 };
 
 var showDialog = function (element) {
@@ -41,7 +48,7 @@ var showDialog = function (element) {
 var clickHandler = function (event) {
   deletePin();
   if (event.target.classList.contains('pin')) {
-    setAtr(event.target);
+    setupActivePin(event.target);
     showDialog(dialogWindow);
   }
 };
@@ -51,20 +58,12 @@ pinMap.addEventListener('click', clickHandler);
 var keydownHandler = function (event) {
   if (event.keyCode === ENTER_KEY_CODE && event.target.classList.contains('pin')) {
     deletePin();
-    setAtr(event.target);
+    setupActivePin(event.target);
     showDialog(dialogWindow);
   }
 };
 
 pinMap.addEventListener('keydown', keydownHandler);
-
-var deletePin = function () {
-  var pinActive = document.querySelector('.' + PIN_ACTIVE_CLASS_NAME);
-  if (pinActive) {
-    removeAtr(pinActive);
-  }
-  document.removeEventListener('keydown', keydownHandler);
-};
 
 dialogClose.addEventListener('click', function () {
   dialogWindow.style.display = 'none';
