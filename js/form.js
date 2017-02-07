@@ -3,6 +3,7 @@
 var dialogWindow = document.querySelector('.dialog');
 var dialogClose = dialogWindow.querySelector('.dialog__close');
 var pinMap = document.querySelector('.tokyo__pin-map');
+var pins = document.querySelector('.pin');
 var formField = document.querySelector('.notice__form');
 var adTitle = formField .querySelector('#title');
 var price = formField .querySelector('#price');
@@ -47,10 +48,14 @@ var showDialog = function (element) {
 
 var clickHandler = function (event) {
   deletePin();
+  var elementClicked;
   if (event.target.classList.contains('pin')) {
-    setupActivePin(event.target);
-    showDialog(dialogWindow);
+    elementClicked = event.target;
+  } else if (!event.target.classList.contains('pin')) {
+    elementClicked = event.target.parentNode;
   }
+  setupActivePin(elementClicked);
+  showDialog(dialogWindow);
 };
 
 pinMap.addEventListener('click', clickHandler);
