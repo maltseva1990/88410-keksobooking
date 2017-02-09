@@ -50,11 +50,13 @@ var clickHandler = function (event) {
   var elementClicked;
   if (event.target.classList.contains('pin')) {
     elementClicked = event.target;
-  } else if (!event.target.classList.contains('pin')) {
+  } else if (event.target.parentNode.classList.contains('pin')) {
     elementClicked = event.target.parentNode;
   }
-  setupActivePin(elementClicked);
-  showDialog(dialogWindow);
+  if(elementClicked) {
+    setupActivePin(elementClicked);
+    showDialog(dialogWindow);
+  }
 };
 
 pinMap.addEventListener('click', clickHandler);
