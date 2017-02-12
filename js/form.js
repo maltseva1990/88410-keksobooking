@@ -37,8 +37,8 @@ window.synchronizeFields(type, price, roomTypes, roomPrices, currentProperty); /
 roomNumber.addEventListener('change', function () {
   var roomValue = +roomNumber.value;
   if (roomValue === 2 || roomValue === 100) {
-      capacity.value = 3;
-    } else {
+    capacity.value = 3;
+  } else {
     capacity.value = 0;
-    }
+  }
 });
