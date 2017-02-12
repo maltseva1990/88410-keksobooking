@@ -32,13 +32,13 @@ window.synchronizeFields(checkOut, checkIn, availableCheckOut, availableCheckIn,
 
 window.synchronizeFields(roomNumber, capacity, roomAmount, roomCapacity, currentProperty);
 
-// не рботает с window.synchronizeFields: window.synchronizeFields(type, price, roomTypes, roomPrices, currentProperty);
+window.synchronizeFields(type, price, roomTypes, roomPrices, currentProperty); // тут эт функция не работает не пойму пока как решить
 
 roomNumber.addEventListener('change', function () {
-    var roomValue = +roomNumber.value;
-    if (roomValue === 2 || roomValue === 100) {
+  var roomValue = +roomNumber.value;
+  if (roomValue === 2 || roomValue === 100) {
       capacity.value = 3;
     } else {
-        capacity.value = 0;
+    capacity.value = 0;
     }
-  });
+});
