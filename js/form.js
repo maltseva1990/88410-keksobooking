@@ -30,7 +30,7 @@ window.synchronizeFields(checkIn, checkOut, availableCheckIn, availableCheckOut,
 
 window.synchronizeFields(checkOut, checkIn, availableCheckOut, availableCheckIn, currentProperty);
 
-window.synchronizeFields(roomNumber, capacity, roomAmount, roomCapacity, currentProperty); //тут эта функция не работает
+window.synchronizeFields(roomNumber, capacity, roomAmount, roomCapacity, currentProperty); // тут эта функция не работает
 
 window.synchronizeFields(type, price, roomTypes, roomPrices, currentProperty);
 
