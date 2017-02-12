@@ -37,7 +37,7 @@ window.initializePins = function () {
     } else if (event.target.parentNode.classList.contains('pin')) {
       elementClicked = event.target.parentNode;
     }
-    if(elementClicked) {
+    if (elementClicked) {
       setupActivePin(elementClicked);
       showDialog(dialogWindow);
     }
