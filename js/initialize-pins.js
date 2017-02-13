@@ -5,7 +5,6 @@ window.initializePins = function () {
   var dialogClose = dialogWindow.querySelector('.dialog__close');
   var pinMap = document.querySelector('.tokyo__pin-map');
   var PIN_ACTIVE_CLASS_NAME = 'pin--active';
-  var ENTER_KEY_CODE = 13;
 
   var setupActivePin = function (element) {
     element.classList.add(PIN_ACTIVE_CLASS_NAME);
@@ -46,7 +45,7 @@ window.initializePins = function () {
   pinMap.addEventListener('click', clickHandler);
 
   var keydownHandler = function (event) {
-    if (event.keyCode === ENTER_KEY_CODE && event.target.classList.contains('pin')) {
+    if (window.utils.isActivateEvent(event) && event.target.classList.contains('pin')) {
       deletePin();
       setupActivePin(event.target);
       showDialog(dialogWindow);

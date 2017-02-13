@@ -14,8 +14,8 @@ var capacity = formField.querySelector('#capacity');
 var availableCheckIn = ['12', '13', '14'];
 var availableCheckOut = ['12', '13', '14'];
 var currentProperty = 'value';
-var roomAmount = ['1 комната', '2 комнаты', '100 комнат'];
-var roomCapacity = ['не для гостей', 'для 3 гостей'];
+var roomAmount = ['1', '2', '100'];
+var roomCapacity = ['0', '3', '3'];
 var roomTypes = ['Квартира', 'Лачуга', 'Дворец'];
 var roomPrices = [1000, 0, 10000];
 adres.required = true;
@@ -33,7 +33,7 @@ window.synchronizeFields(checkOut, checkIn, availableCheckOut, availableCheckIn,
 window.synchronizeFields(roomNumber, capacity, roomAmount, roomCapacity, currentProperty); // тут эта функция не работает
 
 window.synchronizeFields(type, price, roomTypes, roomPrices, currentProperty);
-
+/*
 roomNumber.addEventListener('change', function () {
   var roomValue = +roomNumber.value;
   if (roomValue === 2 || roomValue === 100) {
@@ -41,4 +41,4 @@ roomNumber.addEventListener('change', function () {
   } else {
     capacity.value = 0;
   }
-});
+});*/
