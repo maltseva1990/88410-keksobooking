@@ -34,7 +34,7 @@ window.synchronizeFields(checkOut, checkIn, availableCheckOut, availableCheckIn,
 window.synchronizeFields(roomNumber, capacity, roomAmount, roomCapacity, currentProperty);
 
 window.synchronizeFields(capacity, roomNumber, roomCapacity, roomAmount, currentProperty);
-var currentProperty = 'min';
-window.synchronizeFields(type, price, roomTypes, roomPrices, currentProperty );
+
+window.synchronizeFields(type, price, roomTypes, roomPrices, 'min');
 
 
