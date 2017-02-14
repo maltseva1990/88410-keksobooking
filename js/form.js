@@ -16,13 +16,14 @@ var availableCheckOut = ['12', '13', '14'];
 var currentProperty = 'value';
 var roomAmount = ['1', '2', '100'];
 var roomCapacity = ['0', '3', '3'];
-var roomTypes = ['Квартира', 'Лачуга', 'Дворец'];
+var roomTypes = ['flat', 'small-flat', 'palace'];
 var roomPrices = [1000, 0, 10000];
 adres.required = true;
-price.required = true;
+// price.required = true;
 adTitle.required = true;
-price.min = 1000;
-price.max = 1000000;
+
+// price.max = 1000000;
+// price.min = 1000;
 adTitle.minLength = 30;
 adTitle.maxLength = 100;
 
@@ -30,15 +31,10 @@ window.synchronizeFields(checkIn, checkOut, availableCheckIn, availableCheckOut,
 
 window.synchronizeFields(checkOut, checkIn, availableCheckOut, availableCheckIn, currentProperty);
 
-window.synchronizeFields(roomNumber, capacity, roomAmount, roomCapacity, currentProperty); // тут эта функция не работает
+window.synchronizeFields(roomNumber, capacity, roomAmount, roomCapacity, currentProperty);
 
-window.synchronizeFields(type, price, roomTypes, roomPrices, currentProperty);
-/*
-roomNumber.addEventListener('change', function () {
-  var roomValue = +roomNumber.value;
-  if (roomValue === 2 || roomValue === 100) {
-    capacity.value = 3;
-  } else {
-    capacity.value = 0;
-  }
-});*/
+window.synchronizeFields(capacity, roomNumber, roomCapacity, roomAmount, currentProperty);
+var currentProperty = 'min';
+window.synchronizeFields(type, price, roomTypes, roomPrices, currentProperty );
+
+
