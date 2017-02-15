@@ -19,11 +19,11 @@ var roomCapacity = ['0', '3', '3'];
 var roomTypes = ['flat', 'small-flat', 'palace'];
 var roomPrices = [1000, 0, 10000];
 adres.required = true;
-// price.required = true;
+price.required = true;
 adTitle.required = true;
 
-// price.max = 1000000;
-// price.min = 1000;
+price.max = 1000000;
+price.min = 1000;
 adTitle.minLength = 30;
 adTitle.maxLength = 100;
 
