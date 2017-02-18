@@ -12,12 +12,12 @@ window.showCard = (function () {
     hideDialog();
   };
 
-  var showDialog = function(callback) {
+  var showDialog = function (callback) {
     dialog.style.display = 'block';
-    dialogCross.addEventListener('click', function() {
-        dialogCross.setAttribute('aria-pressed', 'true');
-        hideDialog();
-  });
+    dialogCross.addEventListener('click', function () {
+      dialogCross.setAttribute('aria-pressed', 'true');
+      hideDialog();
+    });
     dialogBtnCross = callback;
   };
 
@@ -36,5 +36,5 @@ window.showCard = (function () {
   return {
     showDialog: showDialog,
     hideDialog: hideDialog
-  }
+  };
 })();
