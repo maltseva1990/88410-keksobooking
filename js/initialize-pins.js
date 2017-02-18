@@ -14,6 +14,7 @@ window.initializePins = (function () {
   var removeActivePin = function (element) {
     element.classList.remove(PIN_ACTIVE_CLASS_NAME);
     element.setAttribute('aria-pressed', 'false');
+
   };
 
   var deletePin = function () {
@@ -33,8 +34,10 @@ window.initializePins = (function () {
     var elementClicked;
     if (event.target.classList.contains('pin')) {
       elementClicked = event.target;
+      window.showCard();
     } else if (event.target.parentNode.classList.contains('pin')) {
       elementClicked = event.target.parentNode;
+
     }
     if (elementClicked) {
       setupActivePin(elementClicked);
@@ -58,4 +61,5 @@ window.initializePins = (function () {
     dialogWindow.style.display = 'none';
     deletePin();
   });
+  window.showCard();
 })();

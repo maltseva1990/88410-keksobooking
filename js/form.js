@@ -13,7 +13,7 @@ window.formFields = (function () {
   var capacity = formField.querySelector('#capacity');
   var availableCheckIn = ['12', '13', '14'];
   var availableCheckOut = ['12', '13', '14'];
-  var currentProperty = 'value';
+
   var roomAmount = ['1', '2', '100'];
   var roomCapacity = ['0', '3', '3'];
   var roomTypes = ['flat', 'small-flat', 'palace'];
@@ -27,15 +27,23 @@ window.formFields = (function () {
   adTitle.minLength = 30;
   adTitle.maxLength = 100;
 
-  window.synchronizeFields(checkIn, checkOut, availableCheckIn, availableCheckOut, currentProperty);
+  var callbackValue = function (element, value) {
+    element['value'] = value;
+  };
 
-  window.synchronizeFields(checkOut, checkIn, availableCheckOut, availableCheckIn, currentProperty);
+  var callbackMin = function (element, value) {
+    element['min'] = value;
+  };
 
-  window.synchronizeFields(roomNumber, capacity, roomAmount, roomCapacity, currentProperty);
+  window.synchronizeFields(checkIn, checkOut, availableCheckIn, availableCheckOut, callbackValue);
 
-  window.synchronizeFields(capacity, roomNumber, roomCapacity, roomAmount, currentProperty);
+  window.synchronizeFields(checkOut, checkIn, availableCheckOut, availableCheckIn, callbackValue);
 
-  window.synchronizeFields(type, price, roomTypes, roomPrices, 'min');
+  window.synchronizeFields(roomNumber, capacity, roomAmount, roomCapacity, callbackValue);
+
+  window.synchronizeFields(capacity, roomNumber, roomCapacity, roomAmount, callbackValue);
+
+  window.synchronizeFields(type, price, roomTypes, roomPrices, callbackMin);
 
 })();
 
