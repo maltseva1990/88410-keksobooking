@@ -73,7 +73,8 @@ window.initializePins = (function () {
   });
 
   dialogClose.addEventListener('keydown', function (event) {
-    if (utils.isDiactivateEvent(event) || utils.isActivateEvent(event))
+    if (utils.isDiactivateEvent(event) || utils.isActivateEvent(event)) {
       hideDialog();
+    }
   });
 })();
