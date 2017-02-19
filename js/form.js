@@ -36,14 +36,6 @@ window.formFields = (function () {
     element['min'] = value;
   };
 
-  pinMap.addEventListener('click', window.initializePins);
-
-  pinMap.addEventListener('keydown', function (e) {
-    if (window.utils.isActivateEvent(e)) {
-      window.initializePins(e, window.utils.focusEvent);
-    }
-  });
-
   window.synchronizeFields(checkIn, checkOut, availableCheckIn, availableCheckOut, callbackValue);
 
   window.synchronizeFields(checkOut, checkIn, availableCheckOut, availableCheckIn, callbackValue);
