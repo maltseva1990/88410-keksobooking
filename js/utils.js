@@ -11,8 +11,12 @@ window.utils = (function () {
     return evt.keyCode && evt.keyCode === ESCAPE_KEY_CODE;
   };
 
+  var focusEvent =  function (element) {
+    element.focus();
+  };
   return {
     isActivateEvent: isActivateEvent,
-    isDiactivateEvent: isDiactivateEvent
+    isDiactivateEvent: isDiactivateEvent,
+    focusEvent: focusEvent
   };
 })();

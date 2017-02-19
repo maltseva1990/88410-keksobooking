@@ -2,6 +2,7 @@
 
 window.formFields = (function () {
 
+  var pinMap = document.querySelector('.tokyo__pin-map');
   var formField = document.querySelector('.notice__form');
   var adTitle = formField.querySelector('#title');
   var price = formField.querySelector('#price');
@@ -34,6 +35,14 @@ window.formFields = (function () {
   var callbackMin = function (element, value) {
     element['min'] = value;
   };
+
+  pinMap.addEventListener('click', window.initializePins);
+
+  pinMap.addEventListener('keydown', function (e) {
+    if (window.utils.isActivateEvent(e)) {
+      window.initializePins(e, window.utils.focusEvent);
+    }
+  });
 
   window.synchronizeFields(checkIn, checkOut, availableCheckIn, availableCheckOut, callbackValue);
 

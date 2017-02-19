@@ -1,10 +1,12 @@
 'use strict';
 
 window.initializePins = (function () {
+
   var dialogWindow = document.querySelector('.dialog');
   var dialogClose = dialogWindow.querySelector('.dialog__close');
   var pinMap = document.querySelector('.tokyo__pin-map');
   var PIN_ACTIVE_CLASS_NAME = 'pin--active';
+  var onDialogClose = null;
 
   var setupActivePin = function (element) {
     element.classList.add(PIN_ACTIVE_CLASS_NAME);
@@ -25,41 +27,53 @@ window.initializePins = (function () {
     document.removeEventListener('keydown', keydownHandler);
   };
 
-  var showDialog = function (element) {
-    element.style.display = 'block';
-  };
-
   var clickHandler = function (event) {
     deletePin();
     var elementClicked;
     if (event.target.classList.contains('pin')) {
+      onDialogClose = window.utils.focusEvent;
       elementClicked = event.target;
-      window.showCard();
+
     } else if (event.target.parentNode.classList.contains('pin')) {
       elementClicked = event.target.parentNode;
-
     }
     if (elementClicked) {
       setupActivePin(elementClicked);
-      showDialog(dialogWindow);
+    }
+    // здесь не получается добавить window.showCard(dialogWindow, 'dialog')
+    dialogWindow.style.display = 'block';
+  };
+
+  // функция скрывает диалоговое окно
+  var hideDialog = function () {
+    if (typeof onDialogClose === 'function') {
+      var getActive = document.querySelector('.' + PIN_ACTIVE_CLASS_NAME);
+      onDialogClose(getActive);
+      onDialogClose = null;
+    }
+    // здесь не получается добавить window.showCard(dialogWindow, 'invisible')
+    dialogWindow.style.display = 'none';
+  };
+
+  var keydownHandler = function (event) {
+    if (window.utils.isActivateEvent(event) && event.target.classList.contains('pin')) {
+      onDialogClose = window.utils.focusEvent;
+      deletePin();
+      setupActivePin(event.target);
+      window.showCard(dialogWindow, 'dialog');
     }
   };
 
   pinMap.addEventListener('click', clickHandler);
 
-  var keydownHandler = function (event) {
-    if (window.utils.isActivateEvent(event) && event.target.classList.contains('pin')) {
-      deletePin();
-      setupActivePin(event.target);
-      showDialog(dialogWindow);
-    }
-  };
-
   pinMap.addEventListener('keydown', keydownHandler);
 
   dialogClose.addEventListener('click', function () {
-    dialogWindow.style.display = 'none';
-    deletePin();
+    hideDialog();
   });
-  window.showCard();
+
+  dialogClose.addEventListener('keydown', function (event) {
+    if (utils.isDiactivateEvent(event) || utils.isActivateEvent(event))
+      hideDialog();
+  });
 })();
