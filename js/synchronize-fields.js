@@ -1,6 +1,6 @@
 'use strict';
 
-window.synchronizeFields = (function () {
+window.synchronizeValue = (function () {
   return function (firstField, secondField, firstArray, secondArray, callback) {
     firstField.addEventListener('change', function () {
       var index = firstArray.indexOf(firstField.value);

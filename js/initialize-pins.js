@@ -40,19 +40,18 @@ window.initializePins = (function () {
     if (elementClicked) {
       setupActivePin(elementClicked);
     }
-    // здесь не получается добавить window.showCard(dialogWindow, 'dialog')
-    dialogWindow.style.display = 'block';
+    // // добавила функцию вместо display block
+    window.showCard(dialogWindow);
   };
 
-  // функция скрывает диалоговое окно
   var hideDialog = function () {
     if (typeof onDialogClose === 'function') {
       var getActive = document.querySelector('.' + PIN_ACTIVE_CLASS_NAME);
       onDialogClose(getActive);
       onDialogClose = null;
     }
-    // здесь не получается добавить window.showCard(dialogWindow, 'invisible')
-    dialogWindow.style.display = 'none';
+    // добавила функцию вместо display none
+    window.hideCard(dialogWindow);
   };
 
   var keydownHandler = function (event) {

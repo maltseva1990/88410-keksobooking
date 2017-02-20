@@ -35,15 +35,15 @@ window.formFields = (function () {
     element['min'] = value;
   };
 
-  window.synchronizeFields(checkIn, checkOut, availableCheckIn, availableCheckOut, callbackValue);
+  window.synchronizeValue(checkIn, checkOut, availableCheckIn, availableCheckOut, callbackValue);
 
-  window.synchronizeFields(checkOut, checkIn, availableCheckOut, availableCheckIn, callbackValue);
+  window.synchronizeValue(checkOut, checkIn, availableCheckOut, availableCheckIn, callbackValue);
 
-  window.synchronizeFields(roomNumber, capacity, roomAmount, roomCapacity, callbackValue);
+  window.synchronizeValue(roomNumber, capacity, roomAmount, roomCapacity, callbackValue);
 
-  window.synchronizeFields(capacity, roomNumber, roomCapacity, roomAmount, callbackValue);
+  window.synchronizeValue(capacity, roomNumber, roomCapacity, roomAmount, callbackValue);
 
-  window.synchronizeFields(type, price, roomTypes, roomPrices, callbackMin);
+  window.synchronizeValue(type, price, roomTypes, roomPrices, callbackMin);
 
 })();
 
