@@ -30,13 +30,14 @@ window.initializePins = (function () {
   var clickHandler = function (event) {
     deletePin();
     var elementClicked;
+
     if (event.target.classList.contains('pin')) {
+
       onDialogClose = window.utils.focusEvent;
       elementClicked = event.target;
-
-    } else if (event.target.parentNode.classList.contains('pin')) {
+    } else if (event.target.parentNode.classList.contains('pin') && !event.target.classList.contains('pin__main')) {
       elementClicked = event.target.parentNode;
-    }
+    } // так и несмотла убрать событие с pin__main
     if (elementClicked) {
       setupActivePin(elementClicked);
     }
@@ -50,7 +51,6 @@ window.initializePins = (function () {
       onDialogClose(getActive);
       onDialogClose = null;
     }
-
     window.hideCard(dialogWindow);
   };
 
@@ -59,7 +59,7 @@ window.initializePins = (function () {
       onDialogClose = window.utils.focusEvent;
       deletePin();
       setupActivePin(event.target);
-      window.showCard(dialogWindow, 'dialog');
+      window.showCard(dialogWindow);
     }
   };
 
