@@ -27,23 +27,23 @@ window.formFields = (function () {
   adTitle.minLength = 30;
   adTitle.maxLength = 100;
 
-  var callbackValue = function (element, value) {
+  var synchronizeValue = function (element, value) {
     element['value'] = value;
   };
 
-  var callbackMin = function (element, value) {
+  var synchronizeMin = function (element, value) {
     element['min'] = value;
   };
 
-  window.synchronizeValue(checkIn, checkOut, availableCheckIn, availableCheckOut, callbackValue);
+  window.synchronizeFields(checkIn, checkOut, availableCheckIn, availableCheckOut, synchronizeValue);
 
-  window.synchronizeValue(checkOut, checkIn, availableCheckOut, availableCheckIn, callbackValue);
+  window.synchronizeFields(checkOut, checkIn, availableCheckOut, availableCheckIn, synchronizeValue);
 
-  window.synchronizeValue(roomNumber, capacity, roomAmount, roomCapacity, callbackValue);
+  window.synchronizeFields(roomNumber, capacity, roomAmount, roomCapacity, synchronizeValue);
 
-  window.synchronizeValue(capacity, roomNumber, roomCapacity, roomAmount, callbackValue);
+  window.synchronizeFields(capacity, roomNumber, roomCapacity, roomAmount, synchronizeValue);
 
-  window.synchronizeValue(type, price, roomTypes, roomPrices, callbackMin);
+  window.synchronizeFields(type, price, roomTypes, roomPrices, synchronizeMin);
 
 })();
 

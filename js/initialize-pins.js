@@ -40,7 +40,7 @@ window.initializePins = (function () {
     if (elementClicked) {
       setupActivePin(elementClicked);
     }
-    // // добавила функцию вместо display block
+
     window.showCard(dialogWindow);
   };
 
@@ -50,7 +50,7 @@ window.initializePins = (function () {
       onDialogClose(getActive);
       onDialogClose = null;
     }
-    // добавила функцию вместо display none
+
     window.hideCard(dialogWindow);
   };
 

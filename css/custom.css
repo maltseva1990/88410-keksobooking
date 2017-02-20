@@ -1,3 +1,6 @@
 .invisible {
   display: none;
 }
+.dialog {
+  display: none;
+}
