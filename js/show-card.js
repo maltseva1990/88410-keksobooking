@@ -12,5 +12,6 @@ window.showCard = (function () {
 window.hideCard = (function () {
   return function (element) {
     element.classList.add(INVISIBLE);
+    element.setAttribute('aria-hidden', 'true');
   };
 })();
