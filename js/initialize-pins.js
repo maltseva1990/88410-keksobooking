@@ -1,10 +1,12 @@
 'use strict';
 
 window.initializePins = (function () {
+
   var dialogWindow = document.querySelector('.dialog');
   var dialogClose = dialogWindow.querySelector('.dialog__close');
   var pinMap = document.querySelector('.tokyo__pin-map');
   var PIN_ACTIVE_CLASS_NAME = 'pin--active';
+  var onDialogClose = null;
 
   var setupActivePin = function (element) {
     element.classList.add(PIN_ACTIVE_CLASS_NAME);
@@ -14,6 +16,7 @@ window.initializePins = (function () {
   var removeActivePin = function (element) {
     element.classList.remove(PIN_ACTIVE_CLASS_NAME);
     element.setAttribute('aria-pressed', 'false');
+
   };
 
   var deletePin = function () {
@@ -24,38 +27,60 @@ window.initializePins = (function () {
     document.removeEventListener('keydown', keydownHandler);
   };
 
-  var showDialog = function (element) {
-    element.style.display = 'block';
+  var hideDialog = function () {
+    if (typeof onDialogClose === 'function') {
+      var getActive = document.querySelector('.' + PIN_ACTIVE_CLASS_NAME);
+      onDialogClose(getActive);
+      onDialogClose = null;
+    }
+    window.hideCard(dialogWindow);
+  };
+
+  var checkEventTarget = function (event) {
+    var elementClicked;
+    var clickedTarget = event.target;
+    var clickedTargetParent = event.target.parentNode;
+    if (clickedTarget.classList.contains('pin') &&
+      !clickedTarget.classList.contains('pin__main')
+    ) {
+      elementClicked = clickedTarget;
+    } else if (
+      clickedTargetParent &&
+      clickedTargetParent.classList.contains('pin') &&
+      !clickedTargetParent.classList.contains('pin__main')
+    ) {
+      elementClicked = clickedTargetParent;
+    }
+    if (elementClicked) {
+      setupActivePin(elementClicked);
+      window.showCard(dialogWindow);
+    }
   };
 
   var clickHandler = function (event) {
     deletePin();
-    var elementClicked;
-    if (event.target.classList.contains('pin')) {
-      elementClicked = event.target;
-    } else if (event.target.parentNode.classList.contains('pin')) {
-      elementClicked = event.target.parentNode;
-    }
-    if (elementClicked) {
-      setupActivePin(elementClicked);
-      showDialog(dialogWindow);
+    checkEventTarget(event);
+  };
+
+  var keydownHandler = function (event) {
+    if (window.utils.isActivateEvent(event) && event.target.classList.contains('pin')) {
+      onDialogClose = window.utils.focusEvent;
+      deletePin();
+      checkEventTarget(event);
     }
   };
 
   pinMap.addEventListener('click', clickHandler);
 
-  var keydownHandler = function (event) {
-    if (window.utils.isActivateEvent(event) && event.target.classList.contains('pin')) {
-      deletePin();
-      setupActivePin(event.target);
-      showDialog(dialogWindow);
-    }
-  };
-
   pinMap.addEventListener('keydown', keydownHandler);
 
   dialogClose.addEventListener('click', function () {
-    dialogWindow.style.display = 'none';
-    deletePin();
+    hideDialog();
+  });
+
+  dialogClose.addEventListener('keydown', function (event) {
+    if (window.utils.isDiactivateEvent(event) || window.utils.isActivateEvent(event)) {
+      hideDialog();
+    }
   });
 })();
