@@ -9,14 +9,13 @@ window.showCard = (function () {
     var tokyo = document.querySelector('.tokyo');
     var dialogTemplate = document.querySelector('#dialog__template');
     var dialogToClone = dialogTemplate.content.querySelector('.dialog');
-    var dialogTitle = currentPin.querySelector('.dialog__title');
     var dialogCurrentCard = dialogToClone.cloneNode(true);
     var features = dialogCurrentCard.querySelector('.lodge__features');
     features.innerHTML = '';
     var photo = dialogCurrentCard.querySelector('.lodge__photos');
     photo.innerHTML = '';
 
-    /*вот здесь теперь другая проблема - не могу получить parentObj.offer.title, сейчас parentObj - это elementClicked.dataset['pinIndex']*/
+    // вот здесь теперь другая проблема - не могу получить parentObj.offer.title, сейчас parentObj - это elementClicked.dataset['pinIndex']
     dialogCurrentCard.querySelector('.lodge__title').textContent = parentObj.offer.title;
     dialogCurrentCard.querySelector('img').src = parentObj.author.avatar;
     dialogCurrentCard.querySelector('.lodge__address').textContent = parentObj.offer.address;

@@ -12,11 +12,11 @@ window.similarApartments = (function () {
     var similarApartments = JSON.parse(data);
     var newSimilarApartments = similarApartments.slice(0, 3);
 
-    newSimilarApartments.forEach(function(newAppartment, index, array){
+    newSimilarApartments.forEach(function (newAppartment, index, array) {
 
       var pinNewElement = pinToClone.cloneNode(true);
-      var pinIndex = pinNewElement.setAttribute('data-pin-index', index);
 
+      pinNewElement.setAttribute('data-pin-index', index);
       pinNewElement.children[0].alt = similarApartments[index].offer.address;
       pinNewElement.children[0].src = similarApartments[index].author.avatar;
       pinNewElement.style.top = similarApartments[index].location.y + 'px';
