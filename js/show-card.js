@@ -9,19 +9,21 @@ window.showCard = (function () {
     var tokyo = document.querySelector('.tokyo');
     var dialogTemplate = document.querySelector('#dialog__template');
     var dialogToClone = dialogTemplate.content.querySelector('.dialog');
+    var dialogTitle = currentPin.querySelector('.dialog__title');
     var dialogCurrentCard = dialogToClone.cloneNode(true);
     var features = dialogCurrentCard.querySelector('.lodge__features');
     features.innerHTML = '';
     var photo = dialogCurrentCard.querySelector('.lodge__photos');
     photo.innerHTML = '';
 
-    dialogCurrentCard.querySelector('.lodge__title').innerText = parentObj.title;
-    dialogCurrentCard.querySelector('.dialog__title img').src = parentObj.author.avatar;
-    dialogCurrentCard.querySelector('.lodge__address').innerText = parentObj.offer.address;
-    dialogCurrentCard.querySelector('.lodge__price').innerText = parentObj.offer.price;
-    dialogCurrentCard.querySelector('.lodge__rooms-and-guests').innerText = parentObj.offer.rooms + ' комнаты для ' + parentObj.offer.guests + ' гостей';
-    dialogCurrentCard.querySelector('.lodge__checkin-time').innerText = 'Заезд после ' + parentObj.offer.checkin + ', выезд до ' + parentObj.offer.checkout;
-    dialogCurrentCard.querySelector('.lodge__description').innerText = parentObj.offer.description;
+    /*вот здесь теперь другая проблема - не могу получить parentObj.offer.title, сейчас parentObj - это elementClicked.dataset['pinIndex']*/
+    dialogCurrentCard.querySelector('.lodge__title').textContent = parentObj.offer.title;
+    dialogCurrentCard.querySelector('img').src = parentObj.author.avatar;
+    dialogCurrentCard.querySelector('.lodge__address').textContent = parentObj.offer.address;
+    dialogCurrentCard.querySelector('.lodge__price').textContent = parentObj.offer.price;
+    dialogCurrentCard.querySelector('.lodge__rooms-and-guests').textContent = parentObj.offer.rooms + ' комнаты для ' + parentObj.offer.guests + ' гостей';
+    dialogCurrentCard.querySelector('.lodge__checkin-time').textContent = 'Заезд после ' + parentObj.offer.checkin + ', выезд до ' + parentObj.offer.checkout;
+    dialogCurrentCard.querySelector('.lodge__description').textContent = parentObj.offer.description;
 
     var dialog = document.querySelector('.dialog');
     if (dialog) {

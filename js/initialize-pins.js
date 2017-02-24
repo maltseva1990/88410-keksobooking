@@ -53,8 +53,8 @@ window.initializePins = (function () {
     }
     if (elementClicked) {
       setupActivePin(elementClicked);
-// хочу, например, передавать в функцию showCard на вход два параметра - элемент, на котором кликнули и данные из объекта
-      window.showCard(elementClicked, window.similarApartments[i].offer);
+// получилось достать pinIndex с помощью elementClicked.dataset['pinIndex']
+      window.showCard(elementClicked, elementClicked.dataset['pinIndex']);
     }
 
   };

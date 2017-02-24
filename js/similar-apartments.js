@@ -12,21 +12,18 @@ window.similarApartments = (function () {
     var similarApartments = JSON.parse(data);
     var newSimilarApartments = similarApartments.slice(0, 3);
 
-    for (var i = 0; i < newSimilarApartments.length; i++) {
+    newSimilarApartments.forEach(function(newAppartment, index, array){
 
-        // var dataPinIndex = newSimilarApartments[i];
       var pinNewElement = pinToClone.cloneNode(true);
+      var pinIndex = pinNewElement.setAttribute('data-pin-index', index);
 
-      pinNewElement.setAttribute('id', i);
-        // console.log(similarApartments[i].offer);
-      pinNewElement.children[0].alt = similarApartments[i].offer.address;
-
-      pinNewElement.children[0].src = similarApartments[i].author.avatar;
-      pinNewElement.style.top = similarApartments[i].location.y + 'px';
-      pinNewElement.style.left = similarApartments[i].location.x + 'px';
+      pinNewElement.children[0].alt = similarApartments[index].offer.address;
+      pinNewElement.children[0].src = similarApartments[index].author.avatar;
+      pinNewElement.style.top = similarApartments[index].location.y + 'px';
+      pinNewElement.style.left = similarApartments[index].location.x + 'px';
 
       pinMap.appendChild(pinNewElement);
 
-    }
+    });
   };
 })();
