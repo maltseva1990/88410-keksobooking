@@ -3,9 +3,31 @@
 var INVISIBLE = 'invisible';
 
 window.showCard = (function () {
-  return function (element) {
-    element.classList.remove(INVISIBLE);
-    element.setAttribute('aria-hidden', 'false');
+
+  return function (currentPin, parentObj) {
+
+    var tokyo = document.querySelector('.tokyo');
+    var dialogTemplate = document.querySelector('#dialog__template');
+    var dialogToClone = dialogTemplate.content.querySelector('.dialog');
+    var dialogCurrentCard = dialogToClone.cloneNode(true);
+    var features = dialogCurrentCard.querySelector('.lodge__features');
+    features.innerHTML = '';
+    var photo = dialogCurrentCard.querySelector('.lodge__photos');
+    photo.innerHTML = '';
+
+    dialogCurrentCard.querySelector('.lodge__title').innerText = parentObj.title;
+    dialogCurrentCard.querySelector('.dialog__title img').src = parentObj.author.avatar;
+    dialogCurrentCard.querySelector('.lodge__address').innerText = parentObj.offer.address;
+    dialogCurrentCard.querySelector('.lodge__price').innerText = parentObj.offer.price;
+    dialogCurrentCard.querySelector('.lodge__rooms-and-guests').innerText = parentObj.offer.rooms + ' комнаты для ' + parentObj.offer.guests + ' гостей';
+    dialogCurrentCard.querySelector('.lodge__checkin-time').innerText = 'Заезд после ' + parentObj.offer.checkin + ', выезд до ' + parentObj.offer.checkout;
+    dialogCurrentCard.querySelector('.lodge__description').innerText = parentObj.offer.description;
+
+    var dialog = document.querySelector('.dialog');
+    if (dialog) {
+      tokyo.removeChild(dialog);
+    }
+    tokyo.appendChild(dialogCurrentCard);
   };
 })();
 
@@ -15,3 +37,4 @@ window.hideCard = (function () {
     element.setAttribute('aria-hidden', 'true');
   };
 })();
+

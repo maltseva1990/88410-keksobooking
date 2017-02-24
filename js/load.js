@@ -18,4 +18,3 @@ window.load = (function () {
     xhr.send();
   };
 })();
-

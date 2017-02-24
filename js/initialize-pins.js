@@ -4,11 +4,9 @@ window.initializePins = (function () {
 
   var dialogWindow = document.querySelector('.dialog');
   var dialogClose = dialogWindow.querySelector('.dialog__close');
-  var pinMap = document.querySelector('.tokyo__pin-map');
   var PIN_ACTIVE_CLASS_NAME = 'pin--active';
   var onDialogClose = null;
-  var pinTemplate = document.querySelector('#pin-template');
-  var pinToClone = pinTemplate.content.querySelector('.pin');
+  var pinMap = document.querySelector('.tokyo__pin-map');
 
   var setupActivePin = function (element) {
     element.classList.add(PIN_ACTIVE_CLASS_NAME);
@@ -55,8 +53,10 @@ window.initializePins = (function () {
     }
     if (elementClicked) {
       setupActivePin(elementClicked);
-      window.showCard(dialogWindow);
+// хочу, например, передавать в функцию showCard на вход два параметра - элемент, на котором кликнули и данные из объекта
+      window.showCard(elementClicked, window.similarApartments[i].offer);
     }
+
   };
 
   var clickHandler = function (event) {
@@ -86,22 +86,6 @@ window.initializePins = (function () {
     }
   });
 
-
-  window.load('https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data', function (data) {
-    var similarApartments = JSON.parse(data);
-    var newSimilarApartments = similarApartments.slice(0, 3);
-
-    for (var i = 0; i < newSimilarApartments.length; i++) {
-
-      var pinNewElement = pinToClone.cloneNode(true);
-      pinNewElement.setAttribute('id', i);
-      pinNewElement.children[0].alt = similarApartments[i].offer.address;
-      pinNewElement.children[0].src = similarApartments[i].author.avatar;
-      pinNewElement.style.top = similarApartments[i].location.y + 'px';
-      pinNewElement.style.left = similarApartments[i].location.x + 'px';
-      pinMap.appendChild(pinNewElement);
-    }
-
-  });
+  window.load('https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data', window.similarApartments);
 
 })();
