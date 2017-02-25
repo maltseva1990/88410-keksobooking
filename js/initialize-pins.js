@@ -2,10 +2,10 @@
 
 window.initializePins = (function () {
 
-  var dialogWindow = document.querySelector('.dialog');
-  var dialogClose = dialogWindow.querySelector('.dialog__close');
+  // var dialogWindow = document.querySelector('.dialog');
+  // var dialogClose = dialogWindow.querySelector('.dialog__close');
   var PIN_ACTIVE_CLASS_NAME = 'pin--active';
-  var onDialogClose = null;
+  // var onDialogClose = null;
   var pinMap = document.querySelector('.tokyo__pin-map');
 
   var setupActivePin = function (element) {
@@ -27,14 +27,14 @@ window.initializePins = (function () {
     document.removeEventListener('keydown', keydownHandler);
   };
 
-  var hideDialog = function () {
+  /*  var hideDialog = function () {
     if (typeof onDialogClose === 'function') {
       var getActive = document.querySelector('.' + PIN_ACTIVE_CLASS_NAME);
       onDialogClose(getActive);
       onDialogClose = null;
     }
     window.hideCard(dialogWindow);
-  };
+  };*/
 
   var checkEventTarget = function (event) {
     var elementClicked;
@@ -53,7 +53,8 @@ window.initializePins = (function () {
     }
     if (elementClicked) {
       setupActivePin(elementClicked);
-// получилось достать pinIndex с помощью elementClicked.dataset['pinIndex']
+      // console.log(elementClicked.dataset);
+      // console.log(elementClicked.dataset['pinIndex']);
       window.showCard(elementClicked, elementClicked.dataset['pinIndex']);
     }
 
@@ -66,7 +67,7 @@ window.initializePins = (function () {
 
   var keydownHandler = function (event) {
     if (window.utils.isActivateEvent(event) && event.target.classList.contains('pin')) {
-      onDialogClose = window.utils.focusEvent;
+      // onDialogClose = window.utils.focusEvent;
       deletePin();
       checkEventTarget(event);
     }
@@ -76,15 +77,15 @@ window.initializePins = (function () {
 
   pinMap.addEventListener('keydown', keydownHandler);
 
-  dialogClose.addEventListener('click', function () {
-    hideDialog();
-  });
+  // dialogClose.addEventListener('click', function () {
+    // hideDialog();
+  // });
 
-  dialogClose.addEventListener('keydown', function (event) {
-    if (window.utils.isDiactivateEvent(event) || window.utils.isActivateEvent(event)) {
-      hideDialog();
-    }
-  });
+  // dialogClose.addEventListener('keydown', function (event) {
+    // if (window.utils.isDiactivateEvent(event) || window.utils.isActivateEvent(event)) {
+      // hideDialog();
+    // }
+  // });
 
   window.load('https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data', window.similarApartments);
 

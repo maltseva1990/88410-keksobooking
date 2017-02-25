@@ -9,18 +9,18 @@ window.similarApartments = (function () {
     var pinMap = document.querySelector('.tokyo__pin-map');
       // var tokyo = document.querySelector('.tokyo');
 
-    var similarApartments = JSON.parse(data);
-    var newSimilarApartments = similarApartments.slice(0, 3);
+    window.similarApartments = JSON.parse(data);
+    var newSimilarApartments = window.similarApartments.slice(0, 3);
 
     newSimilarApartments.forEach(function (newAppartment, index, array) {
 
       var pinNewElement = pinToClone.cloneNode(true);
 
       pinNewElement.setAttribute('data-pin-index', index);
-      pinNewElement.children[0].alt = similarApartments[index].offer.address;
-      pinNewElement.children[0].src = similarApartments[index].author.avatar;
-      pinNewElement.style.top = similarApartments[index].location.y + 'px';
-      pinNewElement.style.left = similarApartments[index].location.x + 'px';
+      pinNewElement.children[0].alt = window.similarApartments[index].offer.address;
+      pinNewElement.children[0].src = window.similarApartments[index].author.avatar;
+      pinNewElement.style.top = window.similarApartments[index].location.y + 'px';
+      pinNewElement.style.left = window.similarApartments[index].location.x + 'px';
 
       pinMap.appendChild(pinNewElement);
 
