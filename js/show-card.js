@@ -1,30 +1,27 @@
 'use strict';
 
-var INVISIBLE = 'invisible';
-
 window.showCard = (function () {
 
   return function (currentPin, clickedElementIndex) {
-
+    var PIN_ACTIVE_CLASS_NAME = 'pin--active';
     clickedElementIndex = window.similarApartments[clickedElementIndex];
 
     var tokyo = document.querySelector('.tokyo');
     var dialogTemplate = document.querySelector('#dialog__template');
     var dialogToClone = dialogTemplate.content.querySelector('.dialog');
-
     var dialogCurrentCard = dialogToClone.cloneNode(true);
-    // var dialogBlock = dialogCurrentCard.querySelector('.dialog');
-    // var dialogClose = dialogCurrentCard.querySelector('.dialog__close');
-
+    var dialogClose = dialogCurrentCard.querySelector('.dialog__close');
     var photos = dialogCurrentCard.querySelector('.lodge__photos');
-    photos.innerHTML = '';
+    var onDialogClose = null;
 
-    for (var i = 0; i < photos.length; i++) {
-      var newPhoto = document.createElement('img');
-      newPhoto.src = photos[i];
+    clickedElementIndex.offer.photos.forEach(function (newPhoto, index, array) {
+      newPhoto = document.createElement('img');
+      newPhoto.src = photos[index];
       newPhoto.setAttribute('alt', 'photo');
+      newPhoto.setAttribute('width', 50);
+      newPhoto.setAttribute('height', 50);
       photos.appendChild(newPhoto);
-    }
+    });
 
     dialogCurrentCard.querySelector('.lodge__title').textContent = clickedElementIndex.offer.title;
     dialogCurrentCard.querySelector('img').src = clickedElementIndex.author.avatar;
@@ -40,14 +37,28 @@ window.showCard = (function () {
     if (dialog) {
       tokyo.removeChild(dialog);
     }
+    var hideDialog = function () {
+      if (typeof onDialogClose === 'function') {
+        var getActive = document.querySelector('.' + PIN_ACTIVE_CLASS_NAME);
+        onDialogClose(getActive);
+        onDialogClose = null;
+      }
+      window.hideCard(dialogCurrentCard);
+    };
     tokyo.appendChild(dialogCurrentCard);
-  };
-})();
 
-window.hideCard = (function () {
-  return function (element) {
-    element.classList.add(INVISIBLE);
-    element.setAttribute('aria-hidden', 'true');
+    dialogClose.addEventListener('click', function () {
+      window.hideCard(dialogCurrentCard);
+    });
+    dialogClose.addEventListener('click', function () {
+      hideDialog();
+    });
+    dialogClose.addEventListener('keydown', function (event) {
+      if (window.utils.isDiactivateEvent(event) || window.utils.isActivateEvent(event)) {
+        hideDialog();
+      }
+    });
   };
+
 })();
 
