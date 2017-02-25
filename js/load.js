@@ -14,7 +14,7 @@ window.load = (function () {
         onLoad(event.target.response);
       }
     });
-    console.log(xhr.response);
+
     xhr.open('GET', url);
     xhr.responseType = 'json';
     xhr.send();
