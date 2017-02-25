@@ -1,6 +1,6 @@
 'use strict';
 
-window.similarApartments = (function () {
+window.getSimilarApartments = (function () {
 
   return function (data) {
 
@@ -16,7 +16,7 @@ window.similarApartments = (function () {
       var pinNewElement = pinToClone.cloneNode(true);
 
       pinNewElement.setAttribute('data-pin-index', index);
-      pinNewElement.tabindex = 0; // как можно добавить табиндекс?
+      pinNewElement.setAttribute('tabindex', 0);
       pinNewElement.children[0].alt = window.similarApartments[index].offer.address;
       pinNewElement.children[0].src = window.similarApartments[index].author.avatar;
       pinNewElement.style.top = window.similarApartments[index].location.y + 'px';

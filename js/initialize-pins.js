@@ -53,7 +53,6 @@ window.initializePins = (function () {
 
   var keydownHandler = function (event) {
     if (window.utils.isActivateEvent(event) && event.target.classList.contains('pin')) {
-      // onDialogClose = window.utils.focusEvent;
       deletePin();
       checkEventTarget(event);
     }
@@ -63,6 +62,6 @@ window.initializePins = (function () {
 
   pinMap.addEventListener('keydown', keydownHandler);
 
-  window.load('https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data', window.similarApartments);
+  window.load('https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data', window.getSimilarApartments);
 
 })();

@@ -1,6 +1,6 @@
 'use strict';
 
-window.hideCard = (function () {
+window.cardHideHandler = (function () {
   var INVISIBLE = 'invisible';
   return function (element) {
     element.classList.add(INVISIBLE);
