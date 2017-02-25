@@ -2,9 +2,9 @@
 
 window.showCard = (function () {
 
-  return function (currentPin, currentIndex) {
+  return function (currentPin, cuttentIndex) {
     var PIN_ACTIVE_CLASS_NAME = 'pin--active';
-    var currentDataElement = window.similarApartments[currentIndex];
+    var currentElement = window.similarApartments[cuttentIndex];
 
     var tokyo = document.querySelector('.tokyo');
     var dialogTemplate = document.querySelector('#dialog__template');
@@ -14,24 +14,24 @@ window.showCard = (function () {
     var photos = dialogCurrentCard.querySelector('.lodge__photos');
     var onDialogClose = null;
 
-    currentDataElement.offer.photos.forEach(function (newPhoto, index, array) {
-      newPhoto = document.createElement('img');
-      newPhoto.src = currentDataElement.offer.photos[index];
-      newPhoto.setAttribute('alt', 'photo');
-      newPhoto.setAttribute('width', 50);
-      newPhoto.setAttribute('height', 50);
-      photos.appendChild(newPhoto);
+    currentElement.offer.photos.forEach(function (newPhoto, index, array) {
+      var newPhotoElement = document.createElement('img');
+      newPhotoElement.src = newPhoto;
+      newPhotoElement.setAttribute('alt', 'photo');
+      newPhotoElement.setAttribute('width', 50);
+      newPhotoElement.setAttribute('height', 50);
+      photos.appendChild(newPhotoElement);
     });
 
-    dialogCurrentCard.querySelector('.lodge__title').textContent = currentDataElement.offer.title;
-    dialogCurrentCard.querySelector('img').src = currentDataElement.author.avatar;
-    dialogCurrentCard.querySelector('.lodge__address').textContent = currentDataElement.offer.address;
-    dialogCurrentCard.querySelector('.lodge__price').textContent = currentDataElement.offer.price;
-    dialogCurrentCard.querySelector('.lodge__rooms-and-guests').textContent = currentDataElement.offer.rooms +
-      ' комнаты для ' + currentDataElement.offer.guests + ' гостей';
-    dialogCurrentCard.querySelector('.lodge__checkin-time').textContent = 'Заезд после ' + currentDataElement.offer.checkin +
-      ', выезд до ' + currentDataElement.offer.checkout;
-    dialogCurrentCard.querySelector('.lodge__description').textContent = currentDataElement.offer.description;
+    dialogCurrentCard.querySelector('.lodge__title').textContent = currentElement.offer.title;
+    dialogCurrentCard.querySelector('img').src = currentElement.author.avatar;
+    dialogCurrentCard.querySelector('.lodge__address').textContent = currentElement.offer.address;
+    dialogCurrentCard.querySelector('.lodge__price').textContent = currentElement.offer.price;
+    dialogCurrentCard.querySelector('.lodge__rooms-and-guests').textContent = currentElement.offer.rooms +
+      ' комнаты для ' + currentElement.offer.guests + ' гостей';
+    dialogCurrentCard.querySelector('.lodge__checkin-time').textContent = 'Заезд после ' + currentElement.offer.checkin +
+      ', выезд до ' + currentElement.offer.checkout;
+    dialogCurrentCard.querySelector('.lodge__description').textContent = currentElement.offer.description;
 
     var dialog = document.querySelector('.dialog');
     if (dialog) {
