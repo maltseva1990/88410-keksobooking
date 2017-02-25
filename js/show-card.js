@@ -2,9 +2,9 @@
 
 window.showCard = (function () {
 
-  return function (currentPin, cuttentIndex) {
+  return function (currentPin, currentIndex) {
     var PIN_ACTIVE_CLASS_NAME = 'pin--active';
-    var currentElement = window.similarApartments[cuttentIndex];
+    var currentElement = window.similarApartments[currentIndex];
 
     var tokyo = document.querySelector('.tokyo');
     var dialogTemplate = document.querySelector('#dialog__template');
@@ -43,7 +43,7 @@ window.showCard = (function () {
         onDialogClose(activePinElement);
         onDialogClose = null;
       }
-      window.hideCard(dialogCurrentCard);
+      window.cardHideHandler(dialogCurrentCard);
     };
     tokyo.appendChild(dialogCurrentCard);
 
