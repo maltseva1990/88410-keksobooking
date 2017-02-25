@@ -10,12 +10,13 @@ window.load = (function () {
       if (event.target.status >= 400) {
         throw new Error('Failed to load data. Server returned status: ' + event.target.status);
       } else if (event.target.status >= 200) {
+
         onLoad(event.target.response);
       }
     });
-
+    console.log(xhr.response);
     xhr.open('GET', url);
-
+    xhr.responseType = 'json';
     xhr.send();
 
   };

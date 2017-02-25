@@ -8,7 +8,8 @@ window.getSimilarApartments = (function () {
     var pinToClone = pinTemplate.content.querySelector('.pin');
     var pinMap = document.querySelector('.tokyo__pin-map');
 
-    window.similarApartments = JSON.parse(data);
+    window.similarApartments = data;
+
     var newSimilarApartments = window.similarApartments.slice(0, 3);
 
     newSimilarApartments.forEach(function (newAppartment, index, array) {
