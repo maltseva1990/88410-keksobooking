@@ -5,6 +5,8 @@ window.initializePins = (function () {
   var PIN_ACTIVE_CLASS_NAME = 'pin--active';
   var pinMap = document.querySelector('.tokyo__pin-map');
 
+  var tokyoFilters = document.querySelector('.tokyo__filters');
+
   var setupActivePin = function (element) {
     element.classList.add(PIN_ACTIVE_CLASS_NAME);
     element.setAttribute('aria-pressed', 'true');
@@ -62,6 +64,11 @@ window.initializePins = (function () {
 
   pinMap.addEventListener('keydown', keydownHandler);
 
-  window.load('https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data', window.getSimilarApartments);
+  window.load('https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data', function(){
+    var pinsData = window.getSimilarApartments;
+    tokyoFilters.addEventListener('change', function () {
+      window.filterPins(pinsData);
+    });
+  });
 
 })();
