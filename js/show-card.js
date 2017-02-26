@@ -46,15 +46,33 @@ window.showCard = (function () {
       window.cardHideHandler(dialogCurrentCard);
     };
     tokyo.appendChild(dialogCurrentCard);
+    var removeActivePin = function (element) {
+      element.classList.remove(PIN_ACTIVE_CLASS_NAME);
+      element.setAttribute('aria-pressed', 'false');
 
+    };
+    var deletePin = function () {
+      var pinActive = document.querySelector('.' + PIN_ACTIVE_CLASS_NAME);
+      if (pinActive) {
+        removeActivePin(pinActive);
+      }
+      document.removeEventListener('keydown', keydownHandler);
+    };
+    var keydownHandler = function (event) {
+      if (window.utils.isActivateEvent(event) && event.target.classList.contains('pin')) {
+        deletePin();
+      }
+    };
     dialogClose.addEventListener('click', function () {
       window.cardHideHandler(dialogCurrentCard);
     });
     dialogClose.addEventListener('click', function () {
+      deletePin();
       hideDialog();
     });
     dialogClose.addEventListener('keydown', function (event) {
       if (window.utils.isDiactivateEvent(event) || window.utils.isActivateEvent(event)) {
+        deletePin();
         hideDialog();
       }
     });
