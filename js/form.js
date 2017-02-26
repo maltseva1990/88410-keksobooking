@@ -27,7 +27,6 @@ window.formFields = (function () {
   adTitle.minLength = 30;
   adTitle.maxLength = 100;
 
-  window.load('https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data', window.getSimilarApartments);
 
   var synchronizeValue = function (element, value) {
     element['value'] = value;

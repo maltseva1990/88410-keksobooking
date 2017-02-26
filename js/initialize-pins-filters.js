@@ -1,6 +1,7 @@
 'use strict';
 
-window.filterPins = (function () {
+window.initializePinsFilters = (function () {
+
   return function (pinsData) {
 
     var tokyoFilters = document.querySelector('.tokyo__filters');
@@ -8,8 +9,8 @@ window.filterPins = (function () {
     var filterPrice = tokyoFilters.querySelector('#housing_price');
     var filterRoomsAmount = tokyoFilters.querySelector('#housing_room-number');
     var filterGuests = tokyoFilters.querySelector('#housing_guests-number');
+
     var ANY = 'any';
-    var LOW_PRICE = 'low';
     var MIDDLE_PRICE = 'middle';
     var HIGH_PRICE = 'hight';
     var MIN_MIDDLE_PRICE = 10000;
@@ -17,7 +18,7 @@ window.filterPins = (function () {
 
     var getRangePrice = function (apartmentPrice) {
       switch (filterPrice.value) {
-        case LOW_PRICE:
+        case 'low':
           return (apartmentPrice < MIN_MIDDLE_PRICE);
         case MIDDLE_PRICE:
           return (apartmentPrice >= MIN_MIDDLE_PRICE && apartmentPrice <= MAX_MIDDLE_PRICE);
@@ -27,24 +28,28 @@ window.filterPins = (function () {
       return false;
     };
 
+    filterPrice.addEventListener('change', function () {
+      pinsData.filter(getRangePrice);
+    });
     var getRangeType = function (apartmentType) {
-      return (filterType.value === ANY) || (apartmentType === filterType.value);
+      return filterType.value === ANY || apartmentType === filterType.value;
     };
-
+    filterType.addEventListener('change', function () {
+      pinsData.filter(getRangeType);
+    });
     var getRangeRooms = function (apartmentRooms) {
-      return (filterRoomsAmount.value === ANY) || (apartmentRooms === parseInt(filterRoomsAmount.value, 10));
+      var roomsValue = parseInt(filterRoomsAmount.value, 10);
+      return filterRoomsAmount.value === ANY || apartmentRooms === roomsValue;
     };
-
+    filterRoomsAmount.addEventListener('change', function () {
+      pinsData.filter(getRangeRooms);
+    });
     var getRangeGuests = function (apartmentGuests) {
-      return (filterGuests.value === ANY) || (apartmentGuests === parseInt(filterGuests.value, 10));
+      var guestValue = parseInt(filterGuests.value, 10);
+      return filterGuests.value === ANY || apartmentGuests === guestValue;
     };
-
-
-      return (function (apartment) {
-        pinsData.getRangeType(apartment.offer.type);
-        pinsData.getRangePrice(apartment.offer.price);
-        pinsData.getRangeRooms(apartment.offer.rooms) ;
-        pinsData.getRangeGuests(apartment.offer.guests);
-      });
+    filterGuests.addEventListener('change', function () {
+      pinsData.filter(getRangeGuests);
+    });
   };
 })();
