@@ -62,8 +62,9 @@ window.initializePins = (function () {
 
   pinMap.addEventListener('keydown', keydownHandler);
 
-  window.load('https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data', function (e) {
-    window.initializePinsFilters(e);
-    window.getSimilarApartments(e);
+  window.load('https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data', function (data) {
+    window.initializePinsFilters(data);
+    var test = data;
+    window.getSimilarApartments(test);
   });
 })();
